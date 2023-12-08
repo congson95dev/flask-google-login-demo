@@ -2,6 +2,9 @@
 
 This repo use as demo for google login by SSO (single sign on) using `authlib` library
 
+Followed by this tutorial:<br>
+https://www.youtube.com/watch?v=fZLWO3_V06Q
+
 ## The flow of login:
 we have `AppID`, `AppSecret`. we will use it to transfer as `client_id` and `client_secret`
 
