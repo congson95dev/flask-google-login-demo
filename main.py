@@ -4,7 +4,7 @@ import os
 import requests
 
 from authlib.integrations.flask_client import OAuth
-from flask import Flask, abort, redirect, render_template, session, url_for
+from flask import Flask, redirect, render_template, session, url_for
 
 app = Flask(__name__)
 
@@ -38,7 +38,7 @@ def home():
 
 
 # callback url
-@app.route("/signin-google")
+@app.route("/auth-callback")
 def googleCallback():
     token = oauth.myApp.authorize_access_token()
     session["user"] = token
