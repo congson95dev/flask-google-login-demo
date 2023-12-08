@@ -27,7 +27,7 @@ oauth.register(
         "scope": "openid profile email",
     },
     server_metadata_url=f'{appConf.get("OAUTH2_META_URL")}',
-    authorize_params={'access_type': 'offline'}, # add this to get refresh_token
+    authorize_params={'access_type': 'offline'},  # add this to get refresh_token
 )
 
 
@@ -39,7 +39,9 @@ def home():
 
 # callback url
 @app.route("/auth-callback")
-def googleCallback():
+def google_callback():
+    # call google api and transfer authorize_code to get access_token and refresh_token
+    # the call will automatic handled by authorize_access_token()
     token = oauth.myApp.authorize_access_token()
     session["user"] = token
     return redirect(url_for("home"))
@@ -47,10 +49,10 @@ def googleCallback():
 
 # login url
 @app.route("/google-login")
-def googleLogin():
+def google_login():
     # redirect to google api and when success, it will redirect to our callback url
-    # the flow will automatic handle by authorize_redirect()
-    return oauth.myApp.authorize_redirect(redirect_uri=url_for("googleCallback", _external=True))
+    # the call will automatic handled by authorize_redirect()
+    return oauth.myApp.authorize_redirect(redirect_uri=url_for("google_callback", _external=True))
 
 
 @app.route("/logout")
@@ -60,7 +62,7 @@ def logout():
 
 
 @app.route("/refresh")
-def refreshToken():
+def google_refresh_token():
     refresh_token = session["user"]["refresh_token"]
     params = {
         "grant_type": "refresh_token",
