@@ -21,6 +21,7 @@ click login
 ## Detail of the explaination (this step was debugged in the authlib library):
 
 click login<br>
+generate state and nonce by random string<br>
 `authlib` generate url:<br>
 `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=&redirect_uri=127.0.0.1:5000/auth-callback&scope=openid+profile+email&state=&nonce=&access_type=offline`
 <br>redirect to that url, that url will show the login form of google
@@ -32,6 +33,7 @@ google run api to generate `code` => this step is handle by google, we don't see
 google redirect callback url:<br>
 `127.0.0.1:5000/auth-callback?state=&code=&scope=email+profile+openid&authuser=0&prompt=consent`
 <br>now we have `code`.
+<br>**note**: the same `state` is returned, but the `nonce` is gone. I guess `state` returned so we can check if the call is from google or not
 
 `authlib` generate url with below information:<br>
 `https://oauth2.googleapis.com/token`
