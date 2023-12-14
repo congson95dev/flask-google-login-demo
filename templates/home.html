@@ -10,10 +10,10 @@
     {% if session %}
     <h1>Welcome {{session.userinfo.preferred_username}}!</h1>
     <p><a href="{{url_for('logout')}}">Logout</a></p>
-    <p><a href="{{url_for('refreshToken')}}">Refresh Token</a></p>
+    <p><a href="{{url_for('google_refresh_token')}}">Refresh Token</a></p>
     <div><pre>{{pretty}}</pre></div>
     {% else %}
-    <p><a href="{{url_for('googleLogin')}}">Login with Google</a></p>
+    <p><a href="{{url_for('google_login')}}">Login with Google</a></p>
     {% endif %}
 </body>
 
