@@ -33,7 +33,9 @@ google run api to generate `code` => this step is handle by google, we don't see
 google redirect callback url:<br>
 `127.0.0.1:5000/auth-callback?state=&code=&scope=email+profile+openid&authuser=0&prompt=consent`
 <br>now we have `code`.
-<br>**note**: the same `state` is returned, but the `nonce` is gone. I guess `state` returned so we can check if the call is from google or not
+<br>**note**: the same `state` is returned, but the `nonce` is gone.
+<br>`state` to prevent CSRF attack.
+<br>`nonce` (Number Used Once) to prevent replay attack.
 
 `authlib` generate url with below information:<br>
 `https://oauth2.googleapis.com/token`
@@ -43,7 +45,7 @@ google redirect callback url:<br>
 
 redirect to that url
 
-google check and generate access token and refresh token
+google check and generate `access token`, `refresh token` and `id token` (this `id token` contain information that can be decode by `jwt.io` including `nonce`)
 
 ![flow.png](flow.png)
 
